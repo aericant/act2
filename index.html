@@ -7,7 +7,20 @@
 
     <h1>Search for a Value</h1>
 
-    <button onclick="searchArray()">Enter Array and Search</button>
+    <label>Enter array values (separated by commas):</label><br>
+    <input type="text" id="arrayInput">
+
+    <br><br>
+
+    <label>Enter value to search:</label><br>
+    <input type="number" id="searchValue">
+
+    <br><br>
+
+    <button onclick="searchArray()">Search</button>
+
+    <h2>Entered Array:</h2>
+    <p id="array"></p>
 
     <h2>Result:</h2>
     <p id="result"></p>
@@ -16,36 +29,69 @@
 
         function searchArray() {
 
+            let rawInput = document.getElementById("arrayInput").value;
+
             let numbers = [];
 
-            let size = Number(prompt("Enter the number of elements:"));
+            let currentNum = "";
 
-            for (let i = 0; i < size; i++) {
+            for (let i = 0; i < rawInput.length; i++) {
 
-                numbers[i] = Number(prompt("Enter value " + i + ":"));
+                if (rawInput[i] === ",") {
+
+                    numbers[numbers.length] = Number(currentNum.trim());
+
+                    currentNum = "";
+
+                } else {
+
+                    currentNum += rawInput[i];
+
+                }
+            }
+
+            numbers[numbers.length] = Number(currentNum.trim());
+
+
+            let arrayOutput = "";
+
+            for (let i = 0; i < numbers.length; i++) {
+
+                arrayOutput +=
+                    "Index " + i + ": " + numbers[i] + "<br>";
 
             }
 
-            let search = Number(prompt("Enter the value to search:"));
+            document.getElementById("array").innerHTML = arrayOutput;
+
+
+            let search = Number(
+                document.getElementById("searchValue").value
+            );
 
             let found = false;
+
 
             for (let i = 0; i < numbers.length; i++) {
 
                 if (numbers[i] === search) {
 
                     document.getElementById("result").innerHTML =
-                        "Value " + search + " found at index " + i + ".";
+                        "Value " + search +
+                        " found at index " + i + ".";
 
                     found = true;
+
                     break;
                 }
             }
 
+
             if (found === false) {
 
                 document.getElementById("result").innerHTML =
-                    "Value " + search + " does not exist in the array.";
+                    "Value " + search +
+                    " does not exist in the array.";
 
             }
         }
