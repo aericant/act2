@@ -39,18 +39,19 @@
 
                 if (rawInput[i] === ",") {
 
-                    numbers[numbers.length] = Number(currentNum.trim());
+                    numbers[numbers.length] = Number(currentNum);
 
                     currentNum = "";
 
-                } else {
+                } 
+                else if (rawInput[i] !== " ") {
 
                     currentNum += rawInput[i];
 
                 }
             }
 
-            numbers[numbers.length] = Number(currentNum.trim());
+            numbers[numbers.length] = Number(currentNum);
 
 
             let arrayOutput = "";
@@ -62,12 +63,12 @@
 
             }
 
-            document.getElementById("array").innerHTML = arrayOutput;
+            document.getElementById("array").innerHTML =
+                arrayOutput;
 
 
-            let search = Number(
-                document.getElementById("searchValue").value
-            );
+            let search =
+                Number(document.getElementById("searchValue").value);
 
             let found = false;
 
